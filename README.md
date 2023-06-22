@@ -1,6 +1,7 @@
 Chord Structure Generator
 
 This is a simple Python script that generates MIDI files for different chord types based on user input. It provides a graphical user interface (GUI) using the Tkinter library for easy interaction.
+
 Dependencies
 
     Python 3
@@ -16,7 +17,7 @@ pip install midiutil
 
 Run the script using the following command:
 
-    python chord_structure_generator.py
+    python chord.py
 
     The GUI window titled "Chord Structure Generator" will open.
     Select the root note of the chord from the "Root Note" entry field.
