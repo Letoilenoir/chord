@@ -9,7 +9,23 @@ chord_types = {
     "Minor": [0, 3, 7],
     "Diminished": [0, 3, 6],
     "Augmented": [0, 4, 8],
-    "Seventh": [0, 4, 7, 10]
+    "Seventh": [0, 4, 7, 10],
+    "Major 7th":[0, 3, 7, 11],
+    "Minor 7th":[0, 3, 7, 10],
+    "Diminished 7th":[0, 3, 6, 9],
+    "Aug 7th":[0, 4, 8, 10],
+    "Aug 9th":[0, 4, 7, 10, 14],
+    "Aug 11th":[0, 4, 8, 10, 18],
+    "Aug 13th":[0, 4, 8, 10, 14, 18],
+    "Maj 9th":[0, 4, 7, 11, 14],
+    "Min 9th":[0, 3, 7, 10, 14],
+    "Dom 9th":[0, 4, 7, 10, 14],
+    "Min 11th":[0, 3, 7, 10, 14, 17],
+    "Dom 11th":[0, 4, 7, 10, 14, 17],
+    "Maj 13th":[0, 4, 7, 11, 14, 21],
+    "Min 13th":[0, 3, 7, 10, 14, 21],
+    "sus2":[0, 2, 7],
+    "sus4":[0, 5, 7],
 }
 
 # Define a dictionary to map note names to MIDI note numbers
@@ -35,7 +51,7 @@ note_map = {
 
 # Function to handle button click
 def generate_chord():
-    root_note = root_note_entry.get().upper()  # Convert to uppercase for case-insensitive matching
+    root_note = root_note_entry.get().capitalize()  # Convert the first letter to uppercase
     if root_note not in note_map:
         # Display an error message for invalid input
         error_label.config(text="Invalid root note")

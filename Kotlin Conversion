@@ -1,0 +1,139 @@
+import org.jfugue.player.Player
+import org.jfugue.theory.Chord
+import org.jfugue.theory.ChordProgression
+
+import javax.swing.*
+import java.awt.*
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+import java.io.File
+import java.io.IOException
+
+object ChordStructureGenerator {
+
+    // Define a dictionary of chord types
+    private val chordTypes = arrayOf(
+        arrayOf("Major", "0", "4", "7"),
+        arrayOf("Minor", "0", "3", "7"),
+        arrayOf("Diminished", "0", "3", "6"),
+        arrayOf("Augmented", "0", "4", "8"),
+        arrayOf("Seventh", "0", "4", "7", "10")
+    )
+
+    // Define a dictionary to map note names to MIDI note numbers
+    private val noteMap = arrayOf(
+        arrayOf("C", "60"),
+        arrayOf("C#", "61"),
+        arrayOf("Db", "61"),
+        arrayOf("D", "62"),
+        arrayOf("D#", "63"),
+        arrayOf("Eb", "63"),
+        arrayOf("E", "64"),
+        arrayOf("F", "65"),
+        arrayOf("F#", "66"),
+        arrayOf("Gb", "66"),
+        arrayOf("G", "67"),
+        arrayOf("G#", "68"),
+        arrayOf("Ab", "68"),
+        arrayOf("A", "69"),
+        arrayOf("A#", "70"),
+        arrayOf("Bb", "70"),
+        arrayOf("B", "71")
+    )
+
+    // Function to handle button click
+    private fun generateChord(rootNote: String, chordType: String) {
+        var rootNoteNum = -1
+        for (note in noteMap) {
+            if (note[0].equals(rootNote, ignoreCase = true)) {
+                rootNoteNum = note[1].toInt()
+                break
+            }
+        }
+
+        if (rootNoteNum == -1) {
+            // Display an error message for invalid input
+            showError("Invalid root note")
+            return
+        }
+
+        var chordIntervals: IntArray? = null
+        for (chord in chordTypes) {
+            if (chord[0].equals(chordType, ignoreCase = true)) {
+                chordIntervals = IntArray(chord.size - 1) { i -> chord[i + 1].toInt() }
+                break
+            }
+        }
+
+        if (chordIntervals == null) {
+            // Display an error message for invalid input
+            showError("Invalid chord type")
+            return
+        }
+
+        // Create chord progression using JFugue
+        val chordProgression = ChordProgression()
+        val chord = Chord(rootNote + chordType)
+        chordProgression.addChord(chord)
+
+        // Get chord as a string representation
+        val chordString = chordProgression.pattern.toString()
+
+        // Render chord diagram
+        val chordPanel = JPanel()
+        val chordLabel = JLabel(chordString)
+        chordPanel.add(chordLabel)
+
+        // Show chord diagram in a dialog
+        JOptionPane.showMessageDialog(null, chordPanel, "Chord Diagram", JOptionPane.PLAIN_MESSAGE)
+
+        // Generate MIDI file using JFugue
+        val player = Player()
+        player.saveMidi(chordProgression, File("$rootNote-$chordType.mid"))
+    }
+
+    // Helper method to display error messages
+    private fun showError(errorMessage: String) {
+        JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE)
+    }
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        // Create GUI
+        val frame = JFrame("Chord Structure Generator")
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        frame.layout = GridLayout(4, 2)
+
+        // Root Note Label and Entry
+        val rootNoteLabel = JLabel("Root Note")
+        val rootNoteEntry = JTextField()
+        frame.add(rootNoteLabel)
+        frame.add(rootNoteEntry)
+
+        // Chord Type Label and Dropdown
+        val chordTypeLabel = JLabel("Chord Type")
+        val chordTypeDropdown = JComboBox<String>()
+        for (chord in chordTypes) {
+            chordTypeDropdown.addItem(chord[0])
+        }
+        frame.add(chordTypeLabel)
+        frame.add(chordTypeDropdown)
+
+        // Error Label
+        val errorLabel = JLabel("", SwingConstants.CENTER)
+        errorLabel.foreground = Color.RED
+        frame.add(errorLabel)
+
+        // Generate Chord Button
+        val generateButton = JButton("Generate Chord")
+        generateButton.addActionListener { e: ActionEvent? ->
+            val rootNote = rootNoteEntry.text.toUpperCase()
+            val chordType = chordTypeDropdown.selectedItem as String
+            generateChord(rootNote, chordType)
+        }
+        frame.add(generateButton)
+
+        frame.size = Dimension(300, 150)
+        frame.isVisible = true
+    }
+}
