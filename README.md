@@ -1,5 +1,5 @@
 07/01/2024 Tested for Midi file output via new VS install
-"Flat" Root notes eg "Ab" not currently recognised as vatild user input, Sharp root notes(eg A#) & natural (eg A) working.
+"Flat" Root notes eg "Ab" not currently recognised as valid user input, Sharp root notes(eg A#) & natural (eg A) working.
 
 Chord Structure Generator
 
