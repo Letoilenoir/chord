@@ -7,6 +7,7 @@ import midiutil
 chord_types = {
     "Major": [0, 4, 7],
     "Minor": [0, 3, 7],
+    "Minor 7th": [0, 3, 7, 10],
     "Diminished": [0, 3, 6],
     "Augmented": [0, 4, 8],
     "Seventh": [0, 4, 7, 10],
