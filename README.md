@@ -1,3 +1,6 @@
+07/01/2024 Tested for Midi file output via new VS install
+"Flat" Root notes eg "Ab" not currently recognised as valid user input, Sharp root notes(eg A#) & natural (eg A) working.
+
 Chord Structure Generator
 
 This is a simple Python script that generates MIDI files for different chord types based on user input. It provides a graphical user interface (GUI) using the Tkinter library for easy interaction.

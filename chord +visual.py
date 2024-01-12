@@ -2,6 +2,11 @@
 
 import tkinter as tk
 import midiutil
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+
+
 
 # Define a dictionary of chord types
 chord_types = {
@@ -50,6 +55,38 @@ note_map = {
     "B": 71
 }
 
+def visualize_chord(root_note, chord_notes):
+    # Create a guitar fretboard visualization
+    fig, ax = plt.subplots()
+    ax.set_xlim(-1, 6)
+    ax.set_ylim(-1, 5)
+
+    # Draw guitar frets
+    for i in range(6):
+        rect = Rectangle((0, i), 5, 1, linewidth=1, edgecolor='black')
+        ax.add_patch(rect)
+
+    # Draw guitar strings
+    for j in range(6):
+        rect = Rectangle((j, 0), 1, 5, linewidth=1, edgecolor='black')
+        ax.add_patch(rect)
+
+    # Highlight the notes of the chord
+    for note in chord_notes:
+        fret = note % 5
+        string = note // 5
+        rect = Rectangle((fret, string), 1, 1, facecolor='red', alpha=0.5)
+        ax.add_patch(rect)
+
+    plt.title(f"Chord Visualization: {root_note}")
+    plt.xlabel("Frets")
+    plt.ylabel("Strings")
+    plt.xticks(range(6), ["E", "A", "D", "G", "B", "e"])
+    plt.yticks(range(5, 0, -1), range(1, 6))
+    plt.grid(True)
+    plt.show()
+    
+
 # Function to handle button click
 def generate_chord():
     root_note = root_note_entry.get().capitalize()  # Convert the first letter to uppercase
@@ -78,6 +115,9 @@ def generate_chord():
             volume=100
         )
 
+    # Visualize the chord on a guitar fretboard
+    visualize_chord(root_note, chord_types[chord_type])
+        
     # Construct the MIDI file name
     file_name = root_note + "_" + chord_type + ".mid"
     
