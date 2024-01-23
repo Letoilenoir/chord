@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+import tkinter as tk
+from tkinter import ttk
+import midiutil
+
+# Define a dictionary of chord types
+chord_types = {
+    "Major": [0, 4, 7],
+    "Minor": [0, 3, 7],
+    "Diminished": [0, 3, 6],
+    "Augmented": [0, 4, 8],
+    "Seventh": [0, 4, 7, 10]
+}
+
+# Define a dictionary to map note names to MIDI note numbers
+note_map = {
+    "C": 60, "C#": 61, "Db": 61, "D": 62,
+    "D#": 63, "Eb": 63, "E": 64, "F": 65,
+    "F#": 66, "Gb": 66, "G": 67, "G#": 68,
+    "Ab": 68, "A": 69, "A#": 70, "Bb": 70, "B": 71
+}
+
+# Define chord progressions
+progressions = {
+    "I-IV-V-I": ["Major", "Major", "Major"],
+    "ii-V-I": ["Minor", "Seventh", "Major"],
+    "vi-IV-I-V": ["Minor", "Major", "Major", "Seventh"]
+}
+
+# Function to handle button click
+def generate_chord():
+    root_note = root_note_var.get().upper()  # Convert to uppercase for case-insensitive matching
+    if root_note not in note_map:
+        # Display an error message for invalid input
+        error_label.config(text="Invalid root note")
+        return
+    root_note_num = note_map[root_note]
+    
+    # Create MIDI file
+    midi_file = midiutil.MIDIFile(1)  # 1 track
+    track = 0
+    channel = 0
+    time = 0
+
+    # Get selected progression
+    selected_progression = progression_var.get()
+
+    # Generate MIDI events for each chord in the progression
+    for chord_type in progressions[selected_progression]:
+        for note in chord_types[chord_type]:
+            # Add note-on event
+            midi_file.addNote(
+                track,
+                channel,
+                note + root_note_num,
+                time,
+                duration=1,
+                volume=100
+            )
+        time += 1  # Add a rest between chords
+
+    # Construct the MIDI file name
+    file_name = f"{root_note}_{selected_progression.replace(' ', '_')}.mid"
+
+    # Save the MIDI file
+    with open(file_name, "wb") as file:
+        midi_file.writeFile(file)
+
+    # Reset the error label
+    error_label.config(text="")
+
+# Create GUI
+root = tk.Tk()
+root.title("Chord Structure Generator")
+
+# Root Note Label and Entry
+root_note_label = tk.Label(root, text="Root Note")
+root_note_label.grid(row=0, column=0)
+root_note_var = tk.StringVar(root)
+root_note_var.set("C")  # Set default value
+root_note_entry = ttk.Combobox(root, textvariable=root_note_var, values=list(note_map.keys()))
+root_note_entry.grid(row=0, column=1)
+
+# Chord Progression Label and Dropdown
+progression_label = tk.Label(root, text="Chord Progression")
+progression_label.grid(row=1, column=0)
+progression_var = tk.StringVar(root)
+progression_var.set("I-IV-V-I")  # Set default value
+progression_dropdown = ttk.Combobox(root, textvariable=progression_var, values=list(progressions.keys()))
+progression_dropdown.grid(row=1, column=1)
+
+# Error Label
+error_label = tk.Label(root, text="", fg="red")
+error_label.grid(row=2, column=0, columnspan=2)
+
+# Generate Chord Button
+generate_button = tk.Button(root, text="Generate Chord Progression", command=generate_chord)
+generate_button.grid(row=3, column=0, columnspan=2)
+
+# Start the GUI event loop
+root.mainloop()
