@@ -1,61 +1,72 @@
 23/01/24 Added rudimentary cord progression file
-
 07/01/2024 Tested for Midi file output via new VS install
+01/03/2025 Added facility for User to title to Progressions
+01/03/2025 Added funtionality for user to oupen Midi in either MuseScore 3 or Windows Mdeia Player Legacy if installed
+
+******NB Current file containing these enhancements is  chordSeven.py ***********
+
 "Flat" Root notes eg "Ab" not currently recognised as valid user input, Sharp root notes(eg A#) & natural (eg A) working.
 
 Chord Structure Generator
+This Python application generates MIDI files by creating chord progressions. The user can select a root note, choose a chord type, and specify the duration of each chord. The program then generates the chord and saves it as a MIDI file. The MIDI file can be opened with external applications such as MuseScore or Windows Media Player.
 
-This is a simple Python script that generates MIDI files for different chord types based on user input. It provides a graphical user interface (GUI) using the Tkinter library for easy interaction.
+Features
+Chord Generation: Select from a variety of chord types (e.g., Major, Minor, Diminished, Augmented, etc.).
+Custom Root Note: Choose the root note of the chord (e.g., C, D#, F#).
+MIDI File Creation: The generated chords are saved into a MIDI file.
+Open with External Programs: Option to open the generated MIDI file with MuseScore 3 or Windows Media Player Legacy.
+Requirements
+Python 3.x
+Required Python libraries:
+tkinter (for the GUI)
+midiutil (for generating MIDI files)
+You can install the necessary libraries using pip:
 
-Dependencies
-
-    Python 3
-    Tkinter library
-    midiutil library
-
-Usage
-
-    Make sure you have Python 3 installed on your system.
-    Install the required dependencies by running the following command:
-
+bash
+Copy
+Edit
 pip install midiutil
+How to Use
+Run the Application: Start the application by running the script in a Python environment.
 
-Run the script using the following command:
+bash
+Copy
+Edit
+python chord_structure_generator.py
+Input Parameters:
 
-    python chord.py
+Root Note: Enter the root note (e.g., C, D#, F#).
+Chord Type: Select the chord type from the dropdown (e.g., Major, Minor, Seventh).
+Duration: Specify the duration of the chord (in beats).
+Generate the Chord: After inputting the details, click on the Generate Chord button. The chord will be added to the MIDI file.
 
-    The GUI window titled "Chord Structure Generator" will open.
-    Select the root note of the chord from the "Root Note" entry field.
-    Choose the chord type from the dropdown menu labeled "Chord Type".
-    Click the "Generate Chord" button to generate the MIDI file.
-    The MIDI file will be saved with the name <root_note>_<chord_type>.mid in the current directory.
-    If a MIDI file with the same name already exists, it will be overwritten.
+Save and Exit: When you're done adding chords, click Save and Exit. You'll be prompted to provide a title for the MIDI file. The file will be saved with an incremental suffix to ensure unique filenames.
 
-Chord Types
+Opening the MIDI File: After saving the file, you'll have the option to open it using:
 
-The script supports the following chord types:
+MuseScore 3 (if installed).
+Windows Media Player Legacy (if installed).
+Alternatively, you can choose not to open the file immediately.
+Script Overview
+GUI: The application uses tkinter to create a simple graphical interface for user input.
+Chord Types: Supports various chord types including Major, Minor, Diminished, Augmented, and more.
+MIDI File Creation: Uses the midiutil library to create and save MIDI files.
+External Programs: Attempts to open the generated MIDI file with MuseScore 3 or Windows Media Player Legacy.
+Code Explanation
+The code defines several parts:
 
-    Major
-    Minor
-    Diminished
-    Augmented
-    Seventh
+Chord Types: A dictionary of chord types with corresponding note intervals.
+Note Mapping: A dictionary that maps note names (like C, D#, F) to MIDI note numbers.
+Functions:
+generate_chord(): Handles chord generation and adds the chord to the MIDI file.
+save_and_exit(): Prompts the user to save the MIDI file and provides options for opening it with external programs.
+Example
+Enter C as the root note.
+Select Major as the chord type.
+Set the duration to 4 beats.
+Click Generate Chord to add the chord to the MIDI file.
+After generating chords, click Save and Exit, then provide a title for the MIDI file.
+The generated MIDI file will be saved and ready to play!
 
-Note Mapping
-
-The script includes a dictionary called note_map, which maps note names to their corresponding MIDI note numbers. This mapping is used to determine the MIDI note number for the root note of the chord. If you need to add or modify note mappings, you can update the note_map dictionary accordingly.
-GUI Interface
-
-The GUI provides the following elements for user interaction:
-
-    Root Note Label and Entry: Enter the root note of the chord in this field.
-    Chord Type Label and Dropdown: Select the desired chord type from the dropdown menu.
-    Error Label: Displays error messages, such as invalid root note.
-    Generate Chord Button: Click this button to generate the MIDI file based on the provided inputs.
-
-Notes
-
-    The generated MIDI files use a single track with a duration of 1 and a volume of 100 for each note in the chord.
-    The GUI event loop is started using the mainloop() method, which allows the GUI to respond to user interactions.
-
-Feel free to modify and enhance this script as per your needs. Happy chord generating!
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
