@@ -1,7 +1,8 @@
 23/01/24 Added rudimentary cord progression file
 07/01/2024 Tested for Midi file output via new VS install
 01/03/2025 Added facility for User to title to Progressions
-01/03/2025 Added funtionality for user to oupen Midi in either MuseScore 3 or Windows Mdeia Player Legacy if installed
+01/03/2025 Added funtionality for user to open Midi in either MuseScore 3 or Windows Media Player Legacy if installed
+02/03/2024 Changed ptions to open in MuseScore Studio 4 instead of MuseScore 3
 
 ******NB Current file containing these enhancements is  chordSeven.py ***********
 
