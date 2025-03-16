@@ -97,7 +97,7 @@ Clicking on "Generate Chord" will bring up a prompt to add another chord:
 If the usere wants to continue building a sequence they repeat the above sequence
 <img class="image" src="Chord7.png" width = "100%">
 Once the User chooses to end the input they are presented with an option to give the progression a name
-<img class="image" src="docs/assets/Chord8.png" width = "100%">
+<img class="image" src="Chord8.png" width = "100%">
 Clicking "Okay" will save the MIDI file into the same directory that hosts the script and also options to open the MIDI in either MuseScore Studio 4 or Windows Media Player Legacy
 <img class="image" src="Chord9.png" width = "100%">
 
