@@ -67,6 +67,8 @@ Select Major as the chord type.
 Set the duration to 4 beats.
 Click Generate Chord to add the chord to the MIDI file.
 After generating chords, click Save and Exit, then provide a title for the MIDI file.
+
+img source ="Chord1.png"
 The generated MIDI file will be saved and ready to play!
 
 License
