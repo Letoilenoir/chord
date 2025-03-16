@@ -4,7 +4,7 @@
 01/03/2025 Added funtionality for user to open Midi in either MuseScore 3 or Windows Media Player Legacy if installed
 02/03/2024 Changed ptions to open in MuseScore Studio 4 instead of MuseScore 3
 
-******NB Current file containing these enhancements is  chordSeven.py ***********
+******NB Current file containing these enhancements is  chordTen.py ***********
 
 "Flat" Root notes eg "Ab" not currently recognised as valid user input, Sharp root notes(eg A#) & natural (eg A) working.
 
