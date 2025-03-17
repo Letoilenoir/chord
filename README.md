@@ -26,14 +26,14 @@ You can install the necessary libraries using pip:
 bash
 Copy
 Edit
-pip install midiutil
+    pip install midiutil
 How to Use
 Run the Application: Start the application by running the script in a Python environment.
 
 bash
 Copy
 Edit
-python chord_structure_generator.py
+    python chord_structure_generator.py
 Input Parameters:
 
 Root Note: Enter the root note (e.g., C, D#, F#).
@@ -45,7 +45,7 @@ Save and Exit: When you're done adding chords, click Save and Exit. You'll be pr
 
 Opening the MIDI File: After saving the file, you'll have the option to open it using:
 
-MuseScore 3 (if installed).
+MuseScore 4 (if installed).
 Windows Media Player Legacy (if installed).
 Alternatively, you can choose not to open the file immediately.
 Script Overview
@@ -68,12 +68,12 @@ Set the duration to 4 beats.
 Click Generate Chord to add the chord to the MIDI file.
 After generating chords, click Save and Exit, then provide a title for the MIDI file.
 
-img source ="Chord1.png"
+
 The generated MIDI file will be saved and ready to play!
 
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
+<h1>Chords</h1>
 A small Python script for download.<br>
 Will generate either a single chord or a chord progression, allow the user to name the output and save to the same directory that contains the script itself.<br>
 Also gives the option of opening the newly created midi file in MuseScore Studio 4 or Windows Player Legacy
